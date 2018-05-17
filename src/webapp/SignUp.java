@@ -44,21 +44,21 @@ public class SignUp extends HttpServlet {
 		request.setAttribute("title", "Sign Up");
 		request.setAttribute("list", formData);
 		
-		response.getWriter().append("<form method=\"post\" action=\"\">");
-
-		for (Data i: formData) {
-			response.getWriter().append(
-					"<label for=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\">" + i.getLabel() + "</label>"
-					+ "<input name=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\" type=\"text\">"					
-		);}
-		response.getWriter().append(
-				"<input type=\"submit\">"
-				+ "</form>");
+//		response.getWriter().append("<form method=\"post\" action=\"\">");
+//
+//		for (Data i: formData) {
+//			response.getWriter().append(
+//					"<label for=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\">" + i.getLabel() + "</label>"
+//					+ "<input name=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\" type=\"text\">"					
+//		);}
+//		response.getWriter().append(
+//				"<input type=\"submit\">"
+//				+ "</form>");
 		
-//		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
-//		if (dispatcher != null) {
-//			dispatcher.forward(request, response);
-//		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
+		if (dispatcher != null) {
+			dispatcher.forward(request, response);
+		}
 		
 	}
 

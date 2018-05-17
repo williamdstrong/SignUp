@@ -10,10 +10,13 @@
 </head>
 <body>
 
-    <form method="post" action="signup">
+    <form method="post" action="">
+        <c:set var="s" value="liferayID"/>
         <c:forEach items="${list}" var="item">
-            <label for="${item.getName()}">${item.getLabel()}</label>
-	    <input name="${item.getName()}" display="${item.getOptions()}" type="text">
+        	<c:if  test="${ items.getName() ne 'liferayID' }">
+            	<label for="${item.getName()}">${item.getLabel()}</label>
+	    		<input name="${item.getName()}" type="${item.getOptions()}" type="text">
+	    	</c:if>
         </c:forEach>
     	<input type="submit">
     </form>

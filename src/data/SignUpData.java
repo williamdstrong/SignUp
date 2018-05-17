@@ -80,7 +80,7 @@ public class SignUpData {
 		lastName = new Data<String>("lastName", "Last Name");
 		collegeName = new Data<String>("collegeName", "College/University Name");
 		yearsAtCollege = new Data<Integer>("yearsAtCollege", "Number of years at college/university");
-		liferayID = new Data<Integer>("liferayID", "Liferay ID", "hidden");
+		liferayID = new Data<Integer>("liferayID", "", "hidden");
 	}
 	
 	public SignUpData(
@@ -100,7 +100,7 @@ public class SignUpData {
 		setCollegeName(c);
 		yearsAtCollege = new Data<Integer>("yearsAtCollege", "Number of years at college/university");
 		setYearsAtCollege(y);
-		liferayID = new Data<Integer>("liferayID", "Liferay ID", "hidden");
+		liferayID = new Data<Integer>("liferayID", "", "hidden");
 		setLiferayID(id);
 	}
 	
