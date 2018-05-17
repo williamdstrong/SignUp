@@ -44,10 +44,21 @@ public class SignUp extends HttpServlet {
 		request.setAttribute("title", "Sign Up");
 		request.setAttribute("list", formData);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
-		if (dispatcher != null) {
-			dispatcher.forward(request, response);
-		}
+		response.getWriter().append("<form method=\"post\" action=\"\">");
+
+		for (Data i: formData) {
+			response.getWriter().append(
+					"<label for=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\">" + i.getLabel() + "</label>"
+					+ "<input name=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\" type=\"text\">"					
+		);}
+		response.getWriter().append(
+				"<input type=\"submit\">"
+				+ "</form>");
+		
+//		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
+//		if (dispatcher != null) {
+//			dispatcher.forward(request, response);
+//		}
 		
 	}
 
@@ -70,22 +81,29 @@ public class SignUp extends HttpServlet {
 			formData.put(paramater, paramaterValue[0]);
 			
 		}		
-		
+		System.out.println(formData.get("yearsAtCollege"));
+//		formData.get("firstName");
+//		formData.get("lastName");
+//		formData.get("collegeName");
+//		stoi(formData.get("yearsAtUniversity"));
+//		stoi(formData.get("liferayID"));
 		
 		SignUpData d = new SignUpData(				
 				formData.get("email"),
 				formData.get("firstName"),
 				formData.get("lastName"),
 				formData.get("collegeName"),
-				stoi(formData.get("yearsAtUniversity")),
+				stoi(formData.get("yearsAtCollege")),
 				stoi(formData.get("liferayID"))
 				);
+		List<Data> data = d.metaDataToList();
 		
+		response.getWriter().append("<p>You have input</p>");
 
-
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ThankYou");
-		dispatcher.forward(request, response);
+		for (Data i: data) {
+			response.getWriter().append(
+					"<p>" + i.getLabel() + ":" + i.getData() + "</p>"
+		);}
 
 	}
 	
