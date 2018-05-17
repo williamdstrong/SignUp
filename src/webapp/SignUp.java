@@ -38,22 +38,12 @@ public class SignUp extends HttpServlet {
 		// TODO Auto-generated method stub
 		SignUpData data = new SignUpData();
 		@SuppressWarnings("rawtypes")
-		List<Data> formData = data.metaDataToList();
+		List<Data> formData = data.toList();
 		
 
 		request.setAttribute("title", "Sign Up");
 		request.setAttribute("list", formData);
 		
-//		response.getWriter().append("<form method=\"post\" action=\"\">");
-//
-//		for (Data i: formData) {
-//			response.getWriter().append(
-//					"<label for=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\">" + i.getLabel() + "</label>"
-//					+ "<input name=\"" + i.getName() + "\" type=\"" + i.getOptions() + "\" type=\"text\">"					
-//		);}
-//		response.getWriter().append(
-//				"<input type=\"submit\">"
-//				+ "</form>");
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
 		if (dispatcher != null) {
@@ -81,12 +71,6 @@ public class SignUp extends HttpServlet {
 			formData.put(paramater, paramaterValue[0]);
 			
 		}		
-		System.out.println(formData.get("yearsAtCollege"));
-//		formData.get("firstName");
-//		formData.get("lastName");
-//		formData.get("collegeName");
-//		stoi(formData.get("yearsAtUniversity"));
-//		stoi(formData.get("liferayID"));
 		
 		SignUpData d = new SignUpData(				
 				formData.get("email"),
@@ -96,7 +80,9 @@ public class SignUp extends HttpServlet {
 				stoi(formData.get("yearsAtCollege")),
 				stoi(formData.get("liferayID"))
 				);
-		List<Data> data = d.metaDataToList();
+		List<Data> data = d.toList();
+		
+		d.write();
 		
 		response.getWriter().append("<p>You have input</p>");
 

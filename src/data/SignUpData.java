@@ -1,11 +1,13 @@
 package data;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
 import data.Data;
+import data.Database;
 
-public class SignUpData {
+public class SignUpData extends Database {
 
 	Data<String> email;
 	Data<String> firstName;
@@ -13,11 +15,11 @@ public class SignUpData {
 	Data<String> collegeName;
 	Data<Integer> yearsAtCollege;
 	Data<Integer> liferayID;
+		
 	public String getEmailData() {
 		return email.getData();
 	}
-
-
+	
 	public void setEmail(String email) {
 		// If the string contains @ then it is not null.
 		if (email.contains("@")) { this.email.setData(email); }
@@ -106,7 +108,7 @@ public class SignUpData {
 	
 	
 	@SuppressWarnings("rawtypes")
-	public List<Data> metaDataToList() {
+	public List<Data> toList() {
 		List<Data> d = new LinkedList<>();
 		d.add(email);
 		d.add(firstName);
@@ -116,5 +118,87 @@ public class SignUpData {
 		d.add(liferayID);
 		return d;
 	}
+
+
+	public void read() {
+		initDatabase();
+		try {
+			preparedStatement = connect.prepareStatement(
+					"select * from user_information.sign_up"
+					);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			resultSet = preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			setEmail(resultSet.getString("email"));
+			setFirstName(resultSet.getString("first_name"));			
+			setLastName(resultSet.getString("last_name"));
+			setCollegeName(resultSet.getString("college_name"));
+			setYearsAtCollege(resultSet.getInt("years_at_college"));
+			setLiferayID(resultSet.getInt("liferay_id"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+
+	public void write() {
+		initDatabase();
+		try {
+			preparedStatement = connect.prepareStatement(
+					"insert into user_information.sign_up values (?, ?, ?, ?, ?, ?)"
+					);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int i = 1;
+		for (Data d : this.toList()) {
+			if (i < 5) {
+				insertValueString(i, d);
+			} else
+			{
+				insertValueInt(i, d);
+			}
+			i++;
+		}
+		
+		try {
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void insertValueString(int i, Data<String> d) {
+		try {
+			preparedStatement.setString(i, d.getData());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+
+	private void insertValueInt(int i, Data<Integer> d) {
+		try {
+			preparedStatement.setInt(i, d.getData());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
