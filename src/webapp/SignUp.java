@@ -102,7 +102,7 @@ public class SignUp extends HttpServlet {
 
 		for (Data i: data) {
 			response.getWriter().append(
-					"<p>" + i.getLabel() + ":" + i.getData() + "</p>"
+					"<p>" + i.getLabel() + ": " + i.getData() + "</p>"
 		);}
 
 	}

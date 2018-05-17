@@ -19,7 +19,8 @@ public class SignUpData {
 
 
 	public void setEmail(String email) {
-		this.email.setData(email);
+		// If the string contains @ then it is not null.
+		if (email.contains("@")) { this.email.setData(email); }
 	}
 
 
@@ -59,7 +60,7 @@ public class SignUpData {
 
 
 	public void setYearsAtCollege(Integer yearsAtCollege) {
-		this.yearsAtCollege.setData(yearsAtCollege);
+		if (yearsAtCollege != -1) { this.yearsAtCollege.setData(yearsAtCollege); }
 	}
 
 
@@ -90,17 +91,17 @@ public class SignUpData {
 			int y,
 			int id) {
 		email = new Data<String>("email", "Email Address");
-		email.setData(e);
+		setEmail(e);
 		firstName = new Data<String>("firstName", "First Name");
-		firstName.setData(f);
+		setFirstName(f);
 		lastName = new Data<String>("lastName", "Last Name");
-		lastName.setData(l);
+		setLastName(l);
 		collegeName = new Data<String>("collegeName", "College/University Name");
-		collegeName.setData(c);
+		setCollegeName(c);
 		yearsAtCollege = new Data<Integer>("yearsAtCollege", "Number of years at college/university");
-		yearsAtCollege.setData(y);
+		setYearsAtCollege(y);
 		liferayID = new Data<Integer>("liferayID", "Liferay ID", "hidden");
-		liferayID.setData(id);
+		setLiferayID(id);
 	}
 	
 	
