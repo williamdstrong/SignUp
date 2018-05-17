@@ -12,8 +12,8 @@
 
     <form method="post" action="signup">
         <c:forEach items="${list}" var="item">
-            <label for="${item}">${item}</label>
-            <input name="${item}" type="text">
+            <label for="${item.getName()}">${item.getLabel()}</label>
+	    <input name="${item.getName()}" display="${item.getOptions()}" type="text">
         </c:forEach>
     	<input type="submit">
     </form>

@@ -3,10 +3,10 @@
 <web-app>
   <servlet>
     <servlet-name>SignUp</servlet-name>
-    <servlet-class>com.SignUp</servlet-class>
+    <servlet-class>webapp.SignUp</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SignUp</servlet-name>
-    <url-pattern>/signup/*</url-pattern>
+    <url-pattern></url-pattern>
   </servlet-mapping>
 </web-app>
