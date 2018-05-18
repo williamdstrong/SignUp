@@ -6,21 +6,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/Styles.css">
+
 <title>${title}</title>
 </head>
 <body>
 
-    <form method="post" action="">
+    <form id="form" method="post" action="" novalidate>
         <c:set var="s" value="liferayID"/>
         <c:forEach items="${list}" var="item">
-        	<c:if  test="${ items.getName() ne 'liferayID' }">
-            	<label for="${item.getName()}">${item.getLabel()}</label>
-	    		<input name="${item.getName()}" type="${item.getOptions()}" type="text">
+        	<c:if  test="${ item.getName() ne 'liferayID' }">
+        		<c:if test="${ item.getName() eq 'yearsAtCollege' }">
+        			<label for="${item.getName()}">
+        				<span>${item.getLabel()}</span>
+	    				<input id="${item.getName()}" name="${item.getName()}" type="${item.getOptions()}" type="text" required min="0">
+	    				<p class="${item.getName()} error"></p>
+	    			</label>
+	    		</c:if>
+	    		<c:if test="${ item.getName() ne 'yearsAtCollege' }">
+	            	<label for="${item.getName()}">
+	            		<span>${item.getLabel()}</span>
+			    		<input id="${item.getName()}" name="${item.getName()}" type="${item.getOptions()}" type="text" required>
+		    			<p class="${item.getName()} error"></p>
+	    			</label>
+	    		</c:if>
 	    	</c:if>
         </c:forEach>
         <input type="reset">
     	<input type="submit">
     </form>
+
+	<script type="text/javascript" src="js/validation.js"></script>
 
 </body>
 </html>

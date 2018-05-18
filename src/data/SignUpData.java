@@ -77,12 +77,12 @@ public class SignUpData extends Database {
 
 
 	public SignUpData() {
-		email = new Data<String>("email", "Email Address");
+		email = new Data<String>("email", "Email Address", "email");
 		firstName = new Data<String>("firstName", "First Name");
 		lastName = new Data<String>("lastName", "Last Name");
 		collegeName = new Data<String>("collegeName", "College/University Name");
-		yearsAtCollege = new Data<Integer>("yearsAtCollege", "Number of years at college/university");
-		liferayID = new Data<Integer>("liferayID", "", "hidden");
+		yearsAtCollege = new Data<Integer>("yearsAtCollege", "Number of years at college/university", "number");
+		liferayID = new Data<Integer>("liferayID", "Liferay ID", "hidden");
 	}
 	
 	public SignUpData(

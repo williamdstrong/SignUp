@@ -87,9 +87,11 @@ public class SignUp extends HttpServlet {
 		response.getWriter().append("<p>You have input</p>");
 
 		for (Data i: data) {
-			response.getWriter().append(
-					"<p>" + i.getLabel() + ": " + i.getData() + "</p>"
-		);}
+			if (i.getName() != "liferayID") {
+				response.getWriter().append(
+						"<p>" + i.getLabel() + ": " + i.getData() + "</p>"
+						);}
+		}
 
 	}
 	
