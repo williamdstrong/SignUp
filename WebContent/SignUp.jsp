@@ -18,6 +18,7 @@
 	    		<input name="${item.getName()}" type="${item.getOptions()}" type="text">
 	    	</c:if>
         </c:forEach>
+	<input type="reset">
     	<input type="submit">
     </form>
 
