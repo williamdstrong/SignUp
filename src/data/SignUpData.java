@@ -165,13 +165,23 @@ public class SignUpData extends Database {
 	public void write() {
 		initDatabase();
 		try {
+			preparedStatement = connect.prepareStatement("insert into colleges values (?, default)");
+			preparedStatement.setString(1, this.getCollegeName());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
 			preparedStatement = connect.prepareStatement(
-					"insert into user_information.sign_up values (?, ?, ?, ?, ?, ?)"
+					"insert into user_information.sign_up values (?, ?, ?, "
+					+ "(select college_id FROM colleges where colleges.college_name = ?),"
+					+ "?, ?)"
 					);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		int i = 1;
 		for (Data d : this.toList()) {

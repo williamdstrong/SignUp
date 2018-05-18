@@ -32,4 +32,28 @@
     <servlet-name>EditUser</servlet-name>
     <url-pattern>/EditUser/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>EditCollege</servlet-name>
+    <servlet-class>webapp.EditCollege</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCollege</servlet-name>
+    <url-pattern>/EditCollege/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RemoveCollege</servlet-name>
+    <servlet-class>webapp.RemoveCollege</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RemoveCollege</servlet-name>
+    <url-pattern>/RemoveCollege/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowColleges</servlet-name>
+    <servlet-class>webapp.ShowColleges</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowColleges</servlet-name>
+    <url-pattern>/ShowColleges/</url-pattern>
+  </servlet-mapping>
 </web-app>
