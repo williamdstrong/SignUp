@@ -16,7 +16,7 @@ public class SignUpData extends Database {
 	Data<Integer> yearsAtCollege;
 	Data<Integer> liferayID;
 		
-	public String getEmailData() {
+	public String getEmail() {
 		return email.getData();
 	}
 	
@@ -120,12 +120,13 @@ public class SignUpData extends Database {
 	}
 
 
-	public void read() {
+	public void readUser(String email) {
 		initDatabase();
 		try {
 			preparedStatement = connect.prepareStatement(
-					"select * from user_information.sign_up"
+					"select * from user_information.sign_up where email=?"
 					);
+			preparedStatement.setString(1, email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,14 +137,20 @@ public class SignUpData extends Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		try {
-			setEmail(resultSet.getString("email"));
-			setFirstName(resultSet.getString("first_name"));			
-			setLastName(resultSet.getString("last_name"));
-			setCollegeName(resultSet.getString("college_name"));
-			setYearsAtCollege(resultSet.getInt("years_at_college"));
-			setLiferayID(resultSet.getInt("liferay_id"));
+			if (resultSet.next()) {
+				try {
+					setEmail(email);
+					setFirstName(resultSet.getString("first_name"));			
+					setLastName(resultSet.getString("last_name"));
+					setCollegeName(resultSet.getString("college_name"));
+					setYearsAtCollege(resultSet.getInt("years_at_college"));
+					setLiferayID(resultSet.getInt("liferay_id"));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,6 +158,9 @@ public class SignUpData extends Database {
 
 	}
 
+	public void readColleges() {
+		
+	}
 
 	public void write() {
 		initDatabase();
@@ -196,6 +206,44 @@ public class SignUpData extends Database {
 	private void insertValueInt(int i, Data<Integer> d) {
 		try {
 			preparedStatement.setInt(i, d.getData());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		initDatabase();
+		try {
+			preparedStatement = connect.prepareStatement(
+					"update user_information.sign_up set email=?, first_name=?, last_name=?, college_name=?, years_at_college=?, liferay_id=? where email=?"
+					);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int i = 1;
+		for (Data d : this.toList()) {
+			if (i < 5) {
+				insertValueString(i, d);
+			} else
+			{
+				insertValueInt(i, d);
+			}
+			i++;
+		}
+		
+		try {
+			preparedStatement.setString(7, email.getData());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

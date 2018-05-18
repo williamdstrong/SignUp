@@ -13,13 +13,9 @@
     <form method="post" action="">
         <c:set var="s" value="liferayID"/>
         <c:forEach items="${list}" var="item">
-        	<c:if  test="${ items.getName() ne 'liferayID' }">
-            	<label for="${item.getName()}">${item.getLabel()}</label>
-	    		<input name="${item.getName()}" type="${item.getOptions()}" type="text">
-	    	</c:if>
+        	<p>${ item.getFirstName() } ${ item.getLastName() } ${ item.getEmail() }</p>
+        	<a href="/SignUp/EditUser/${ item.getEmail() }">Edit</a>
         </c:forEach>
-        <input type="reset">
-    	<input type="submit">
     </form>
 
 </body>
