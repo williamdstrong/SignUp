@@ -13,7 +13,7 @@
     <form method="post" action="">
         <c:set var="s" value="liferayID"/>
         <c:forEach items="${list}" var="item">
-        	<c:if  test="${ items.getName() ne 'liferayID' }">
+        	<c:if  test="${ item.getName() ne 'liferayID' }">
             	<label for="${item.getName()}">${item.getLabel()}</label>
 	    		<input name="${item.getName()}" type="${item.getOptions()}" type="text">
 	    	</c:if>
